@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apoya-TEC</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            position: relative; /* Necesario para las imágenes absolutas */
+        }
+
+        /* Contenedor para las imágenes centradas */
+        .imagenes-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .imagenes-header img {
+            width: 80px; /* Ajustamos el tamaño de las imágenes */
+            height: auto;
+        }
+
+        header {
+            text-align: center;
+            background-color: #003366; /* Azul marino */
+            color: white;
+            padding: 40px 20px 20px;
+            border-bottom: 5px solid #fff;
+            position: relative;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            margin-top: 10px;
+            color: #ddd;
+        }
+
+        p {
+            font-size: 1.2em;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: #003366;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #003366;
+            border-radius: 4px;
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        button {
+            background-color: #003366;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+
+        button:hover {
+            background-color: #00509e;
+        }
+
+        #preguntas {
+            margin-top: 20px;
+        }
+
+        .pregunta {
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .pregunta h3 {
+            color: #003366;
+        }
+
+        .respuestas p {
+            background-color: #e0e0e0;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Contenedor para las imágenes centradas -->
+    <div class="imagenes-header">
+        <img src="https://rinacional.tecnm.mx/retrieve/16b09b71-89fb-42aa-a524-de43b3a14b7b" alt="Logo Izquierda">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg6vaNbJP8X2Nyte0wGSJshQYarSYtssrbDsCOyrehF9HfZmXB9Sfu_URphKzFnOG6G-c&usqp=CAU" alt="Logo Derecha">
+    </div>
+
+    <header>
+        <h1>Apoya-TEC</h1>
+        <h2>Campus Minatitlán</h2>
+        <p>Tu espacio para resolver problemas de programación, hardware y software en el Instituto Tecnológico de Minatitlán.</p>
+    </header>
+    
+    <main>
+        <section id="nueva-pregunta">
+            <h2>Haz tu Pregunta</h2>
+            <input type="text" id="titulo" placeholder="Título de la pregunta">
+            <textarea id="descripcion" placeholder="Describe tu problema"></textarea>
+            <button onclick="publicarPregunta()">Publicar</button>
+        </section>
+        
+        <section id="foro">
+            <h2>Preguntas Recientes</h2>
+            <div id="preguntas"></div>
+        </section>
+    </main>
+    
+    <script>
+        function publicarPregunta() {
+            let titulo = document.getElementById('titulo').value;
+            let descripcion = document.getElementById('descripcion').value;
+            
+            if (titulo.trim() === '' || descripcion.trim() === '') {
+                alert('Por favor, completa todos los campos');
+                return;
+            }
+            
+            let pregunta = document.createElement('div');
+            pregunta.classList.add('pregunta');
+            pregunta.innerHTML = `<h3>${titulo}</h3><p>${descripcion}</p><button onclick="responderPregunta(this)">Responder</button><div class="respuestas"></div>`;
+            
+            document.getElementById('preguntas').prepend(pregunta);
+            document.getElementById('titulo').value = '';
+            document.getElementById('descripcion').value = '';
+        }
+
+        function responderPregunta(boton) {
+            let respuesta = prompt('Escribe tu respuesta:');
+            if (respuesta) {
+                let contenedorRespuestas = boton.nextElementSibling;
+                let nuevaRespuesta = document.createElement('p');
+                nuevaRespuesta.textContent = respuesta;
+                contenedorRespuestas.appendChild(nuevaRespuesta);
+            }
+        }
+    </script>
+</body>
+</html>

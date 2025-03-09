@@ -11,123 +11,96 @@
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
-            position: relative; /* Necesario para las imágenes absolutas */
+            transition: background 0.3s, color 0.3s;
         }
 
-        /* Contenedor para las imágenes centradas */
         .imagenes-header {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            width: 100%;
-            padding: 10px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            z-index: 1;
+            padding: 10px;
+            background-color: white;
         }
 
         .imagenes-header img {
-            width: 80px; /* Ajustamos el tamaño de las imágenes */
+            max-width: 100px;
             height: auto;
         }
 
         header {
             text-align: center;
-            background-color: #003366; /* Azul marino */
-            color: white;
-            padding: 40px 20px 20px;
-            border-bottom: 5px solid #fff;
-            position: relative;
-        }
-
-        h1 {
-            margin: 0;
-            font-size: 2.5em;
-        }
-
-        h2 {
-            font-size: 1.5em;
-            margin-top: 10px;
-            color: #ddd;
-        }
-
-        p {
-            font-size: 1.2em;
-        }
-
-        main {
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        section {
-            background-color: white;
-            border-radius: 8px;
-            padding: 20px;
-            width: 80%;
-            max-width: 800px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-
-        h2 {
-            font-size: 1.8em;
-            color: #003366;
-        }
-
-        input[type="text"], textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 2px solid #003366;
-            border-radius: 4px;
-            font-size: 1.1em;
-            color: #333;
-        }
-
-        button {
             background-color: #003366;
             color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1.2em;
+            padding: 20px;
         }
 
-        button:hover {
-            background-color: #00509e;
-        }
-
-        #preguntas {
-            margin-top: 20px;
-        }
-
-        .pregunta {
-            background-color: #f1f1f1;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-        }
-
-        .pregunta h3 {
-            color: #003366;
-        }
-
-        .respuestas p {
-            background-color: #e0e0e0;
+        nav {
+            background-color: #002244;
             padding: 10px;
-            margin: 5px 0;
-            border-radius: 4px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        nav a, nav button, nav input {
+            color: white;
+            font-size: 1.2em;
+            border: none;
+            padding: 5px;
+        }
+
+        nav input {
+            background-color: white;
+            color: black;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .boton {
+            background-color: #003366;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .boton:hover {
+            background-color: #002244;
+        }
+
+        .modo-oscuro {
+            background-color: #121212;
+            color: white;
+        }
+
+        .modo-oscuro header {
+            background-color: #1a1a1a;
+        }
+
+        .modo-oscuro nav {
+            background-color: #333;
+        }
+
+        .modo-oscuro .imagenes-header {
+            background-color: #333;
         }
     </style>
 </head>
 <body>
-    <!-- Contenedor para las imágenes centradas -->
     <div class="imagenes-header">
         <img src="https://rinacional.tecnm.mx/retrieve/16b09b71-89fb-42aa-a524-de43b3a14b7b" alt="Logo Izquierda">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg6vaNbJP8X2Nyte0wGSJshQYarSYtssrbDsCOyrehF9HfZmXB9Sfu_URphKzFnOG6G-c&usqp=CAU" alt="Logo Derecha">
@@ -136,49 +109,72 @@
     <header>
         <h1>Apoya-TEC</h1>
         <h2>Campus Minatitlán</h2>
-        <p>Tu espacio para resolver problemas de programación, hardware y software en el Instituto Tecnológico de Minatitlán.</p>
+        <p>Tu espacio para resolver problemas de programación, hardware y software.</p>
+        <button id="modoOscuro" onclick="cambiarModo()">Modo Oscuro</button>
     </header>
-    
+
+    <nav>
+        <div class="nav-links">
+            <a href="#inicio">Inicio</a>
+            <a href="#foro">Foro</a>
+            <a href="mailto:contacto@apoya-tec.com">Contacto</a>
+            <input type="text" id="busqueda" placeholder="Buscar preguntas...">
+            <button onclick="buscar()">Buscar</button>
+        </div>
+        <div class="nav-buttons">
+            <button class="boton" onclick="window.location.href='login.html'">Iniciar Sesión</button>
+            <button class="boton" onclick="window.location.href='registro.html'">Registrarse</button>
+        </div>
+    </nav>
+
     <main>
         <section id="nueva-pregunta">
             <h2>Haz tu Pregunta</h2>
             <input type="text" id="titulo" placeholder="Título de la pregunta">
+            <select id="categoria">
+                <option value="Programación">Programación</option>
+                <option value="Hardware">Hardware</option>
+                <option value="Software">Software</option>
+            </select>
             <textarea id="descripcion" placeholder="Describe tu problema"></textarea>
-            <button onclick="publicarPregunta()">Publicar</button>
+            <button id="publicarBtn" onclick="publicarPregunta()">Publicar</button>
         </section>
-        
+
         <section id="foro">
             <h2>Preguntas Recientes</h2>
-            <div id="preguntas"></div>
+            <button id="ordenFecha">Ordenar por Fecha</button>
+            <button id="ordenPopularidad">Ordenar por Popularidad</button>
+            <div id="preguntas">
+                <!-- Aquí se mostrarán las preguntas -->
+            </div>
         </section>
     </main>
-    
+
+    <footer>
+        <p>&copy; 2025 Apoya-TEC | Contacto: contacto@apoya-tec.com</p>
+    </footer>
+
     <script>
-        function publicarPregunta() {
-            let titulo = document.getElementById('titulo').value;
-            let descripcion = document.getElementById('descripcion').value;
-            
-            if (titulo.trim() === '' || descripcion.trim() === '') {
-                alert('Por favor, completa todos los campos');
-                return;
-            }
-            
-            let pregunta = document.createElement('div');
-            pregunta.classList.add('pregunta');
-            pregunta.innerHTML = `<h3>${titulo}</h3><p>${descripcion}</p><button onclick="responderPregunta(this)">Responder</button><div class="respuestas"></div>`;
-            
-            document.getElementById('preguntas').prepend(pregunta);
-            document.getElementById('titulo').value = '';
-            document.getElementById('descripcion').value = '';
+        function cambiarModo() {
+            document.body.classList.toggle("modo-oscuro");
         }
 
-        function responderPregunta(boton) {
-            let respuesta = prompt('Escribe tu respuesta:');
-            if (respuesta) {
-                let contenedorRespuestas = boton.nextElementSibling;
-                let nuevaRespuesta = document.createElement('p');
-                nuevaRespuesta.textContent = respuesta;
-                contenedorRespuestas.appendChild(nuevaRespuesta);
+        function publicarPregunta() {
+            const titulo = document.getElementById("titulo").value;
+            const categoria = document.getElementById("categoria").value;
+            const descripcion = document.getElementById("descripcion").value;
+
+            if (titulo && descripcion) {
+                const preguntasDiv = document.getElementById("preguntas");
+                const nuevaPregunta = document.createElement("div");
+                nuevaPregunta.classList.add("pregunta");
+                nuevaPregunta.innerHTML = `<h3>${titulo}</h3><p><strong>Categoría:</strong> ${categoria}</p><p>${descripcion}</p>`;
+                preguntasDiv.prepend(nuevaPregunta);
+
+                document.getElementById("titulo").value = "";
+                document.getElementById("descripcion").value = "";
+            } else {
+                alert("Por favor, completa todos los campos antes de publicar.");
             }
         }
     </script>

@@ -117,3 +117,49 @@ document.getElementById("loginBtn").addEventListener("click", () => {
 
 // Función para mostrar las preguntas cuando se carga la página
 mostrarPreguntas();
+document.addEventListener("DOMContentLoaded", function () {
+    // REGISTRO
+    const registroForm = document.getElementById("registroForm");
+    if (registroForm) {
+        registroForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            let nombre = document.getElementById("nombre").value;
+            let correo = document.getElementById("correo").value;
+            let password = document.getElementById("password").value;
+
+            let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+            if (usuarios.some(user => user.correo === correo)) {
+                alert("El correo ya está registrado.");
+                return;
+            }
+
+            usuarios.push({ nombre, correo, password });
+            localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+            alert("Registro exitoso. Ahora puedes iniciar sesión.");
+            window.location.href = "login.html";
+        });
+    }
+
+    // INICIAR SESIÓN
+    const loginForm = document.getElementById("loginForm");
+    if (loginForm) {
+        loginForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            let correo = document.getElementById("correo").value;
+            let password = document.getElementById("password").value;
+
+            let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+            let usuario = usuarios.find(user => user.correo === correo && user.password === password);
+
+            if (usuario) {
+                localStorage.setItem("usuarioActual", JSON.stringify(usuario));
+                alert("Inicio de sesión exitoso.");
+                window.location.href = "index.html";  // Redirige a la página principal
+            } else {
+                alert("Correo o contraseña incorrectos.");
+            }
+        });
+    }
+});

@@ -7,7 +7,6 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    
     <link rel="stylesheet" href="styles.css">
 
     <style>
@@ -23,19 +22,27 @@
         .modo-oscuro header, .modo-oscuro .navbar {
             background-color: #1a1a1a;
         }
+
+        /* Estilos para el botón de Modo Oscuro */
+        .modo-btn {
+            border: none;
+            background: #f8f9fa;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .modo-oscuro .modo-btn {
+            background: #ffc107;
+            color: black;
+        }
     </style>
 </head>
 
 <body>
-    <!-- Encabezado con logos -->
-    <div class="container d-flex justify-content-between align-items-center py-3">
-        <img src="https://rinacional.tecnm.mx/retrieve/16b09b71-89fb-42aa-a524-de43b3a14b7b" alt="Logo Izquierda" class="img-fluid" style="max-width: 100px;">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg6vaNbJP8X2Nyte0wGSJshQYarSYtssrbDsCOyrehF9HfZmXB9Sfu_URphKzFnOG6G-c&usqp=CAU" alt="Logo Derecha" class="img-fluid" style="max-width: 100px;">
-    </div>
-
-    <!-- NavBar Mejorada -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
+    <!-- Navbar Bootstrap -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
             <a class="navbar-brand" href="#">Apoya-TEC</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -46,96 +53,72 @@
                     <li class="nav-item"><a class="nav-link" href="#foro">Foro</a></li>
                     <li class="nav-item"><a class="nav-link" href="mailto:contacto@apoya-tec.com">Contacto</a></li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="text" id="busqueda" placeholder="Buscar preguntas...">
-                    <button class="btn btn-light" type="button" onclick="buscar()">Buscar</button>
-                </form>
-                <div class="ms-3">
-                    <button class="btn btn-outline-light me-2" onclick="window.location.href='login.html'">Iniciar Sesión</button>
-                    <button class="btn btn-warning" onclick="window.location.href='registro.html'">Registrarse</button>
-                </div>
+                <button class="btn btn-primary me-2" onclick="window.location.href='login.html'">Iniciar Sesión</button>
+                <button class="btn btn-secondary" onclick="window.location.href='registro.html'">Registrarse</button>
             </div>
         </div>
     </nav>
 
-    <!-- Header -->
+    <!-- Carrusel de Imágenes -->
+    <div id="carrusel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" class="d-block w-100" alt="Python">
+            </div>
+            <div class="carousel-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/Java_logo.svg" class="d-block w-100" alt="Java">
+            </div>
+            <div class="carousel-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" class="d-block w-100" alt="HTML5">
+            </div>
+            <div class="carousel-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" class="d-block w-100" alt="CSS3">
+            </div>
+            <div class="carousel-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" class="d-block w-100" alt="JavaScript">
+            </div>
+            <div class="carousel-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/C_Programming_Language.svg" class="d-block w-100" alt="C++">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carrusel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carrusel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+    </div>
+
+    <!-- Header con Botón de Modo Oscuro -->
     <header class="text-center py-4 bg-dark text-white">
         <h1>Apoya-TEC</h1>
         <h2>Campus Minatitlán</h2>
         <p>Tu espacio para resolver problemas de programación, hardware y software.</p>
-        <button id="modoOscuro" class="btn btn-light" onclick="cambiarModo()">Modo Oscuro</button>
+        <button id="modoOscuro" class="modo-btn" onclick="cambiarModo()">Modo Oscuro</button>
     </header>
 
+    <!-- Sección de Preguntas -->
     <main class="container mt-4">
-        <!-- Sección para crear preguntas -->
-        <section id="nueva-pregunta" class="mb-4">
-            <h2>Haz tu Pregunta</h2>
-            <div class="mb-3">
-                <input type="text" class="form-control" id="titulo" placeholder="Título de la pregunta">
-            </div>
-            <div class="mb-3">
-                <select class="form-select" id="categoria">
-                    <option value="Programación">Programación</option>
-                    <option value="Hardware">Hardware</option>
-                    <option value="Software">Software</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <textarea class="form-control" id="descripcion" placeholder="Describe tu problema"></textarea>
-            </div>
-            <button class="btn btn-primary" id="publicarBtn" onclick="publicarPregunta()">Publicar</button>
-        </section>
-
-        <!-- Sección del foro -->
         <section id="foro">
             <h2>Preguntas Recientes</h2>
-            <button class="btn btn-outline-secondary" id="ordenFecha">Ordenar por Fecha</button>
-            <button class="btn btn-outline-secondary" id="ordenPopularidad">Ordenar por Popularidad</button>
-            <div id="preguntas" class="mt-3">
-                <!-- Aquí se mostrarán las preguntas -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">¿Cómo solucionar un error en Python?</h5>
+                    <p class="card-text">Tengo un problema con una variable que no está definida...</p>
+                </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3 mt-4">
-        <p>&copy; 2025 Apoya-TEC | Contacto: contacto@apoya-tec.com</p>
-    </footer>
-
-    <!-- Scripts -->
     <script>
         function cambiarModo() {
             document.body.classList.toggle("modo-oscuro");
-        }
-
-        function publicarPregunta() {
-            const titulo = document.getElementById("titulo").value;
-            const categoria = document.getElementById("categoria").value;
-            const descripcion = document.getElementById("descripcion").value;
-
-            if (titulo && descripcion) {
-                const preguntasDiv = document.getElementById("preguntas");
-                const nuevaPregunta = document.createElement("div");
-                nuevaPregunta.classList.add("card", "mt-3");
-                nuevaPregunta.innerHTML = `
-                    <div class="card-body">
-                        <h5 class="card-title">${titulo}</h5>
-                        <p class="card-text"><strong>Categoría:</strong> ${categoria}</p>
-                        <p class="card-text">${descripcion}</p>
-                    </div>
-                `;
-                preguntasDiv.prepend(nuevaPregunta);
-
-                document.getElementById("titulo").value = "";
-                document.getElementById("descripcion").value = "";
-            } else {
-                alert("Por favor, completa todos los campos antes de publicar.");
-            }
+            let btn = document.getElementById("modoOscuro");
+            btn.innerText = document.body.classList.contains("modo-oscuro") ? "Modo Claro" : "Modo Oscuro";
         }
     </script>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>

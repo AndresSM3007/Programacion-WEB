@@ -4,14 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apoya-TEC</title>
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-
     <style>
         body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
             transition: background 0.3s, color 0.3s;
+        }
+
+        .imagenes-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: white;
+        }
+
+        .imagenes-header img {
+            max-width: 100px;
+            height: auto;
         }
 
         .modo-oscuro {
@@ -19,29 +32,35 @@
             color: white;
         }
 
-        .modo-oscuro header, .modo-oscuro .navbar {
+        .modo-oscuro header, .modo-oscuro nav {
             background-color: #1a1a1a;
         }
 
-        /* Estilos para el botón de Modo Oscuro */
-        .modo-btn {
-            border: none;
-            background: #f8f9fa;
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: 0.3s;
+        .modo-oscuro .imagenes-header {
+            background-color: #333;
         }
-        .modo-oscuro .modo-btn {
-            background: #ffc107;
-            color: black;
+
+        .carousel-item img {
+            max-height: 150px;
+            width: auto;
+            margin: auto;
         }
     </style>
 </head>
-
 <body>
-    <!-- Navbar Bootstrap -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="imagenes-header">
+        <img src="https://rinacional.tecnm.mx/retrieve/16b09b71-89fb-42aa-a524-de43b3a14b7b" alt="Logo Izquierda">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg6vaNbJP8X2Nyte0wGSJshQYarSYtssrbDsCOyrehF9HfZmXB9Sfu_URphKzFnOG6G-c&usqp=CAU" alt="Logo Derecha">
+    </div>
+
+    <header class="text-center bg-primary text-white p-4">
+        <h1>Apoya-TEC</h1>
+        <h2>Campus Minatitlán</h2>
+        <p>Tu espacio para resolver problemas de programación, hardware y software.</p>
+        <button id="modoOscuro" class="btn btn-dark" onclick="cambiarModo()">Modo Oscuro</button>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Apoya-TEC</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -53,72 +72,44 @@
                     <li class="nav-item"><a class="nav-link" href="#foro">Foro</a></li>
                     <li class="nav-item"><a class="nav-link" href="mailto:contacto@apoya-tec.com">Contacto</a></li>
                 </ul>
-                <button class="btn btn-primary me-2" onclick="window.location.href='login.html'">Iniciar Sesión</button>
-                <button class="btn btn-secondary" onclick="window.location.href='registro.html'">Registrarse</button>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="text" placeholder="Buscar preguntas...">
+                    <button class="btn btn-primary" type="submit">Buscar</button>
+                </form>
+                <button class="btn btn-success ms-3" onclick="window.location.href='login.html'">Iniciar Sesión</button>
+                <button class="btn btn-warning ms-2" onclick="window.location.href='registro.html'">Registrarse</button>
             </div>
         </div>
     </nav>
 
-    <!-- Carrusel de Imágenes -->
-    <div id="carrusel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
+    <div id="carouselExample" class="carousel slide my-4" data-bs-ride="carousel">
+        <div class="carousel-inner text-center">
             <div class="carousel-item active">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" class="d-block w-100" alt="Python">
+                <img src="python-logo.png" class="d-block" alt="Python">
             </div>
             <div class="carousel-item">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/Java_logo.svg" class="d-block w-100" alt="Java">
+                <img src="java-logo.png" class="d-block" alt="Java">
             </div>
             <div class="carousel-item">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" class="d-block w-100" alt="HTML5">
+                <img src="html-logo.png" class="d-block" alt="HTML">
             </div>
             <div class="carousel-item">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" class="d-block w-100" alt="CSS3">
-            </div>
-            <div class="carousel-item">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" class="d-block w-100" alt="JavaScript">
-            </div>
-            <div class="carousel-item">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/C_Programming_Language.svg" class="d-block w-100" alt="C++">
+                <img src="css-logo.png" class="d-block" alt="CSS">
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carrusel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carrusel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
         </button>
     </div>
-
-    <!-- Header con Botón de Modo Oscuro -->
-    <header class="text-center py-4 bg-dark text-white">
-        <h1>Apoya-TEC</h1>
-        <h2>Campus Minatitlán</h2>
-        <p>Tu espacio para resolver problemas de programación, hardware y software.</p>
-        <button id="modoOscuro" class="modo-btn" onclick="cambiarModo()">Modo Oscuro</button>
-    </header>
-
-    <!-- Sección de Preguntas -->
-    <main class="container mt-4">
-        <section id="foro">
-            <h2>Preguntas Recientes</h2>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">¿Cómo solucionar un error en Python?</h5>
-                    <p class="card-text">Tengo un problema con una variable que no está definida...</p>
-                </div>
-            </div>
-        </section>
-    </main>
 
     <script>
         function cambiarModo() {
             document.body.classList.toggle("modo-oscuro");
-            let btn = document.getElementById("modoOscuro");
-            btn.innerText = document.body.classList.contains("modo-oscuro") ? "Modo Claro" : "Modo Oscuro";
         }
     </script>
-
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

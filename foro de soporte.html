@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apoya-TEC</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -30,6 +29,7 @@
         .modo-oscuro {
             background-color: #121212;
             color: white;
+            transition: background 0.5s, color 0.5s;
         }
 
         .modo-oscuro header, .modo-oscuro nav {
@@ -43,7 +43,212 @@
         .carousel-item img {
             max-height: 150px;
             width: auto;
-            margin: auto;
+            display: block;
+            margin: 0 auto;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-item img:hover {
+            transform: scale(1.1);
+        }
+
+        .toggle-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .toggle-btn {
+            position: relative;
+            width: 80px;
+            height: 35px;
+            border-radius: 35px;
+            background-color: #555;
+            cursor: pointer;
+            transition: background 0.3s, border 0.3s;
+            border: 3px solid transparent;
+        }
+
+        .toggle-btn::before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: white;
+            border-radius: 50%;
+            top: 50%;
+            left: 5px;
+            transform: translateY(-50%);
+            transition: left 0.3s;
+        }
+
+        .modo-oscuro .toggle-btn {
+            background-color: #444;
+            border: 3px solid #fff;
+        }
+
+        .modo-oscuro .toggle-btn::before {
+            left: 45px;
+        }
+
+        .toggle-btn:hover {
+            border: 3px solid #ddd;
+            background-color: #666;
+        }
+
+        .toggle-btn:active {
+            background-color: #777;
+        }
+
+        .toggle-btn.animate {
+            animation: deslizar 0.3s ease-in-out;
+        }
+
+        @keyframes deslizar {
+            0% {
+                left: 5px;
+            }
+            100% {
+                left: 45px;
+            }
+        }
+
+        .imagenes-software {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            flex-wrap: wrap;
+        }
+
+        .imagenes-software img {
+            width: 120px;
+            margin: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .imagenes-software img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Estilos para las preguntas y respuestas */
+        .pregunta {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .pregunta h3 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        .pregunta p {
+            margin: 10px 0;
+        }
+
+        .pregunta button {
+            background-color: #003366;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .pregunta button:hover {
+            background-color: #002244;
+        }
+
+        .respuesta {
+            background-color: #f0f0f0;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .respuesta p {
+            margin: 5px 0;
+        }
+
+        .respuesta button {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .respuesta button:hover {
+            background-color: #218838;
+        }
+
+        .nueva-pregunta {
+            margin: 20px;
+        }
+
+        .nueva-pregunta input, .nueva-pregunta select, .nueva-pregunta textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .nueva-pregunta button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .nueva-pregunta button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Estilos para que las preguntas y respuestas no se vean afectadas por el modo oscuro */
+        .modo-oscuro .pregunta {
+            background-color: #2a2a2a;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .modo-oscuro .pregunta button {
+            background-color: #0066cc;
+        }
+
+        .modo-oscuro .respuesta {
+            background-color: #333;
+            color: white;
+        }
+
+        /* Estilos para el filtro de preguntas por tema */
+        .filtro-tema {
+            margin: 20px;
+        }
+
+        .filtro-tema select {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .ordenar-btns {
+            margin: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .ordenar-btns button {
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .ordenar-btns button:hover {
+            background-color: #f0f0f0;
         }
     </style>
 </head>
@@ -57,7 +262,10 @@
         <h1>Apoya-TEC</h1>
         <h2>Campus Minatitlán</h2>
         <p>Tu espacio para resolver problemas de programación, hardware y software.</p>
-        <button id="modoOscuro" class="btn btn-dark" onclick="cambiarModo()">Modo Oscuro</button>
+        <div class="toggle-container">
+            <p>Modo Oscuro</p>
+            <div class="toggle-btn" id="modoOscuro" onclick="cambiarModo()"></div>
+        </div>
     </header>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
@@ -85,31 +293,86 @@
     <div id="carouselExample" class="carousel slide my-4" data-bs-ride="carousel">
         <div class="carousel-inner text-center">
             <div class="carousel-item active">
-                <img src="python-logo.png" class="d-block" alt="Python">
+                <img src="https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg" class="d-block mx-auto img-fluid" alt="Java">
             </div>
             <div class="carousel-item">
-                <img src="java-logo.png" class="d-block" alt="Java">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" class="d-block mx-auto img-fluid" alt="HTML">
             </div>
             <div class="carousel-item">
-                <img src="html-logo.png" class="d-block" alt="HTML">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" class="d-block mx-auto img-fluid" alt="CSS">
             </div>
             <div class="carousel-item">
-                <img src="css-logo.png" class="d-block" alt="CSS">
+                <img src="https://networkslearning.com/wp-content/uploads/2020/02/Screenshot-2020-02-15-at-15.54.25.png" class="d-block mx-auto img-fluid" alt="Packet Tracer">
+            </div>
+            <div class="carousel-item">
+                <img src="https://upload.wikimedia.org/wikipedia/labs/8/8e/Mysql_logo.png" class="d-block mx-auto img-fluid" alt="MySQL">
+            </div>
+            <div class="carousel-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Virtualbox_logo.png" class="d-block mx-auto img-fluid" alt="VirtualBox">
+            </div>
+            <div class="carousel-item">
+                <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/hardware-logo-design-template-886754459c90c50d04f3e5ffd02e60f6_screen.jpg?ts=1658996480" class="d-block mx-auto img-fluid" alt="Hardware">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         </button>
         <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
         </button>
+    </div>
+
+    <div id="foro" class="container my-5">
+        <h3>Foro de Preguntas</h3>
+
+        <!-- Filtro de tema -->
+        <div class="filtro-tema">
+            <label for="tema">Selecciona un tema:</label>
+            <select id="tema" class="form-select">
+                <option value="programacion">Programación</option>
+                <option value="software">Software</option>
+                <option value="hardware">Hardware</option>
+            </select>
+        </div>
+
+        <!-- Botones para ordenar preguntas -->
+        <div class="ordenar-btns">
+            <button class="btn btn-secondary">Ordenar por Fecha</button>
+            <button class="btn btn-secondary">Ordenar por Popularidad</button>
+        </div>
+
+        <!-- Nueva pregunta -->
+        <div class="nueva-pregunta">
+            <h4>Haz una nueva pregunta:</h4>
+            <input type="text" id="titulo" placeholder="Título de la pregunta">
+            <textarea id="descripcion" placeholder="Descripción de la pregunta"></textarea>
+            <button>Publicar Pregunta</button>
+        </div>
+
+        <!-- Preguntas -->
+        <div class="pregunta">
+            <h3>Título de la Pregunta</h3>
+            <p>Descripción de la pregunta...</p>
+            <button>Ver Respuestas</button>
+
+            <div class="respuesta">
+                <p>Respuesta...</p>
+                <button>Responder</button>
+            </div>
+        </div>
+
     </div>
 
     <script>
         function cambiarModo() {
             document.body.classList.toggle("modo-oscuro");
+            document.querySelector(".toggle-btn").classList.add("animate");
+            setTimeout(() => {
+                document.querySelector(".toggle-btn").classList.remove("animate");
+            }, 300);
         }
     </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

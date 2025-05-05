@@ -49,7 +49,7 @@ header("Expires: 0");
                         
                         <div class="mt-3 text-center">
                             <p>¿Ya tienes cuenta? <a href="login.php">Inicia sesión aquí</a></p>
-                            <p><a href="index.php">Volver al inicio</a></p>
+                            <p><a href="index.html">Volver al inicio</a></p>
                         </div>
                     </div>
                 </div>

@@ -41,7 +41,7 @@ header("Expires: 0");
                         
                         <div class="mt-3 text-center">
                             <p>¿No tienes cuenta? <a href="registro.php">Regístrate aquí</a></p>
-                            <p><a href="index.php">Volver al inicio</a></p>
+                            <p><a href="index.html">Volver al inicio</a></p>
                         </div>
                     </div>
                 </div>

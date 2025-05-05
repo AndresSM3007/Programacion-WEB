@@ -1,23 +1,63 @@
 <?php
-require 'conexion.php';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nombre = $_POST['nombre'];
-    $correo = $_POST['correo'];
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-    
-    try {
-        $stmt = $conn->prepare("INSERT INTO usuarios (nombre, correo, password_hash) VALUES (?, ?, ?)");
-        $stmt->execute([$nombre, $correo, $password]);
-        
-        header("Location: login.php?registro=exitoso");
-        exit();
-    } catch(PDOException $e) {
-        if ($e->errorInfo[1] == 1062) {
-            $error = "Este correo ya está registrado";
-        } else {
-            $error = "Error al registrar: " . $e->getMessage();
-        }
-    }
-}
+session_start();
+// Configuración básica para evitar caché
+header("Cache-Control: no-cache, no-store, must-revalidate");
+header("Pragma: no-cache");
+header("Expires: 0");
 ?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Apoya-TEC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h2 class="card-title text-center mb-4">Registro de Usuario</h2>
+                        
+                        <!-- Mostrar errores si existen -->
+                        <?php if (isset($_SESSION['error_registro'])): ?>
+                            <div class="alert alert-danger"><?= $_SESSION['error_registro']; unset($_SESSION['error_registro']); ?></div>
+                        <?php endif; ?>
+                        
+                        <form id="registroForm" action="api/auth/register.php" method="POST">
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre Completo</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="correo" class="form-label">Correo Electrónico</label>
+                                <input type="email" class="form-control" id="correo" name="correo" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="confirm_password" class="form-label">Confirmar Contraseña</label>
+                                <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+                        </form>
+                        
+                        <div class="mt-3 text-center">
+                            <p>¿Ya tienes cuenta? <a href="login.php">Inicia sesión aquí</a></p>
+                            <p><a href="index.php">Volver al inicio</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

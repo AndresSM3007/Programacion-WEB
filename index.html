@@ -363,6 +363,31 @@
 
     </div>
 
+    <div class="nueva-pregunta">
+        <h4>Haz una nueva pregunta:</h4>
+        <form id="formPregunta" enctype="multipart/form-data">
+            <input type="text" id="titulo" name="titulo" placeholder="Título de la pregunta" required>
+            <textarea id="descripcion" name="descripcion" placeholder="Descripción de la pregunta" required></textarea>
+            <select id="tema" name="tema" required>
+                <option value="programacion">Programación</option>
+                <option value="software">Software</option>
+                <option value="hardware">Hardware</option>
+                <option value="otro">Otro</option>
+            </select>
+            
+            <div class="subir-imagen">
+                <label for="imagen">Subir imagen (opcional):</label>
+                <input type="file" id="imagen" name="imagen" accept="image/*">
+                <div id="preview-container" style="display:none;">
+                    <img id="preview-imagen" src="#" alt="Vista previa" style="max-width: 200px; max-height: 200px;">
+                    <button type="button" id="eliminar-imagen">Eliminar</button>
+                </div>
+            </div>
+            
+            <button type="submit">Publicar Pregunta</button>
+        </form>
+    </div>
+    
     <script>
         function cambiarModo() {
             document.body.classList.toggle("modo-oscuro");

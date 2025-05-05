@@ -163,3 +163,108 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+// Función para cargar preguntas
+async function cargarPreguntas(tema = null, orden = 'fecha_creacion DESC') {
+    try {
+        let url = 'preguntas.php';
+        if (tema) {
+            url += `?tema=${tema}&orden=${orden}`;
+        }
+        
+        const response = await fetch(url);
+        const preguntas = await response.json();
+        
+        const contenedor = document.getElementById('preguntas-container');
+        contenedor.innerHTML = '';
+        
+        preguntas.forEach(pregunta => {
+            const preguntaElement = document.createElement('div');
+            preguntaElement.className = 'pregunta card mb-3';
+            preguntaElement.innerHTML = `
+                <div class="card-body">
+                    <h5 class="card-title">${pregunta.titulo}</h5>
+                    <p class="card-text">${pregunta.descripcion}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">Publicado por: ${pregunta.autor}</small>
+                        <small class="text-muted">Tema: ${pregunta.tema}</small>
+                        <small class="text-muted">${new Date(pregunta.fecha_creacion).toLocaleString()}</small>
+                    </div>
+                    <div class="mt-2">
+                        <button class="btn btn-sm btn-outline-primary ver-respuestas" data-id="${pregunta.id}">
+                            Ver respuestas (${pregunta.respuestas || 0})
+                        </button>
+                        <div class="votos d-inline-block ms-3">
+                            <button class="btn btn-sm btn-outline-success upvote" data-id="${pregunta.id}">↑</button>
+                            <span class="badge bg-secondary">${pregunta.votos}</span>
+                            <button class="btn btn-sm btn-outline-danger downvote" data-id="${pregunta.id}">↓</button>
+                        </div>
+                    </div>
+                    <div class="respuestas mt-3" id="respuestas-${pregunta.id}" style="display:none;"></div>
+                </div>
+            `;
+            contenedor.appendChild(preguntaElement);
+        });
+        
+        // Agregar eventos a los botones
+        document.querySelectorAll('.ver-respuestas').forEach(btn => {
+            btn.addEventListener('click', cargarRespuestas);
+        });
+        
+        document.querySelectorAll('.upvote, .downvote').forEach(btn => {
+            btn.addEventListener('click', votarPregunta);
+        });
+    } catch (error) {
+        console.error('Error al cargar preguntas:', error);
+    }
+}
+
+// Función para manejar la subida de imágenes
+document.getElementById('imagen').addEventListener('change', function(e) {
+    const previewContainer = document.getElementById('preview-container');
+    const previewImagen = document.getElementById('preview-imagen');
+    
+    if (this.files && this.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            previewImagen.src = e.target.result;
+            previewContainer.style.display = 'block';
+        }
+        
+        reader.readAsDataURL(this.files[0]);
+    }
+});
+
+document.getElementById('eliminar-imagen').addEventListener('click', function() {
+    document.getElementById('imagen').value = '';
+    document.getElementById('preview-container').style.display = 'none';
+});
+
+// Función para enviar una nueva pregunta
+document.getElementById('formPregunta').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    
+    try {
+        const response = await fetch('preguntas.php', {
+            method: 'POST',
+            body: formData
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            alert('Pregunta publicada con éxito');
+            this.reset();
+            document.getElementById('preview-container').style.display = 'none';
+            cargarPreguntas();
+        } else {
+            alert('Error al publicar la pregunta: ' + (result.error || ''));
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error al enviar la pregunta');
+    }
+});

@@ -586,3 +586,37 @@ document.addEventListener("DOMContentLoaded", function() {
         cargarPreguntas(null, e.target.value);
     });
 });
+
+// Ejemplo con fetch API
+document.getElementById('form-registro').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const formData = {
+        nombre: document.getElementById('nombre').value,
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value
+    };
+    
+    try {
+        const response = await fetch('https://apoya-tec.webcindario.com/api/auth/register.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            // Registro exitoso, redirigir al usuario
+            window.location.href = '/perfil.html';
+        } else {
+            // Mostrar error
+            alert(data.error || 'Error en el registro');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error al conectar con el servidor');
+    }
+});

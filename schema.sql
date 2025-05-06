@@ -22,9 +22,7 @@ CREATE TABLE `usuarios` (
 -- Estructura de tabla para la tabla `preguntas`
 --
 
-CREATE TABLE `preguntas` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `usuario_id` int(11) NOT NULL,
+  `usuario_id` int(11) DEFAULT NULL,
   `titulo` varchar(255) NOT NULL,
   `descripcion` text NOT NULL,
   `tema` enum('programacion','software','hardware','otro') NOT NULL DEFAULT 'otro',
@@ -41,10 +39,7 @@ CREATE TABLE `preguntas` (
 -- Estructura de tabla para la tabla `respuestas`
 --
 
-CREATE TABLE `respuestas` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pregunta_id` int(11) NOT NULL,
-  `usuario_id` int(11) NOT NULL,
+  `usuario_id` int(11) DEFAULT NULL,
   `contenido` text NOT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
   `votos` int(11) NOT NULL DEFAULT 0,

@@ -27,7 +27,7 @@ header("Expires: 0");
                             <div class="alert alert-danger"><?= $_SESSION['error_registro']; unset($_SESSION['error_registro']); ?></div>
                         <?php endif; ?>
                         
-                        <form id="registroForm" action="api/auth/register.php" method="POST">
+                        <form id="registroForm" action="api/registro.php" method="POST">
                             <div class="mb-3">
                                 <label for="nombre" class="form-label">Nombre Completo</label>
                                 <input type="text" class="form-control" id="nombre" name="nombre" required>

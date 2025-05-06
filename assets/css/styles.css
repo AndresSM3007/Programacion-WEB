@@ -1,0 +1,302 @@
+/* Reset de márgenes y padding globales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fuente global */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Estilos para las imágenes del header */
+.imagenes-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: white;
+}
+
+.imagenes-header img {
+    max-width: 100px; /* Ajusta el tamaño máximo de las imágenes */
+    height: auto; /* Mantiene la proporción de las imágenes */
+}
+
+/* Estilos para el Header */
+header {
+    text-align: center;
+    background-color: #003366;
+    color: white;
+    padding: 20px;
+}
+
+/* Estilos para los enlaces de navegación */
+nav {
+    background-color: #002244;
+    padding: 10px;
+    text-align: center;
+}
+
+nav a, nav input {
+    color: white;
+    margin: 0 10px;
+    font-size: 1.2em;
+    border: none;
+    padding: 5px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para el main (contenido principal) */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Estilos para las secciones (registro, login, foro) */
+section {
+    background-color: white;
+    padding: 20px;
+    width: 90%;
+    max-width: 800px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+/* Estilos para el pie de página */
+footer {
+    background-color: #003366;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Estilo para el botón de modo oscuro */
+#modoOscuro {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+/* Estilos para las preguntas */
+.pregunta {
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para el modo oscuro */
+.modo-oscuro {
+    background-color: #121212;
+    color: white;
+}
+
+.modo-oscuro header {
+    background-color: #1a1a1a;
+}
+
+.modo-oscuro nav {
+    background-color: #333;
+}
+
+.modo-oscuro section {
+    background-color: #222;
+    color: white;
+}
+
+.modo-oscuro footer {
+    background-color: #1a1a1a;
+}
+
+/* Nueva regla para las imágenes y su contenedor */
+.modo-oscuro .imagenes-header {
+    background-color: #333; /* Fondo oscuro para el contenedor */
+}
+
+.modo-oscuro .imagenes-header img {
+    filter: brightness(0.8); /* Acentúa el contraste de las imágenes en modo oscuro */
+}
+
+/* Estilos para los formularios (registro, login) */
+input[type="text"], input[type="email"], input[type="password"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #003366;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #002244;
+}
+
+/* Estilos para los botones de votación */
+button {
+    padding: 5px 10px;
+    margin-right: 5px;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+button:hover {
+    background-color: #ddd;
+}
+
+button:active {
+    background-color: #ccc;
+}
+
+button:focus {
+    outline: none;
+}
+
+/* Estilos para los botones de votación específicos */
+button[onclick*="up"] {
+    background-color: #4caf50;
+    color: white;
+}
+
+button[onclick*="down"] {
+    background-color: #f44336;
+    color: white;
+}
+
+/* Estilos para el orden de las preguntas */
+button#ordenFecha, button#ordenPopularidad {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #003366;
+    color: white;
+    cursor: pointer;
+}
+
+button#ordenFecha:hover, button#ordenPopularidad:hover {
+    background-color: #002244;
+}
+
+/* Estilos responsivos para dispositivos con pantallas pequeñas */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    nav a, nav input {
+        font-size: 1em;
+    }
+
+    .pregunta {
+        padding: 15px;
+    }
+
+    .pregunta button {
+        width: 100%;
+    }
+}
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 50px;
+}
+form {
+    display: inline-block;
+    text-align: left;
+}
+input, button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+}
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+}
+button:hover {
+    background-color: #218838;
+}
+
+
+/* Estilos para limitar el tamaño de las imágenes del carrusel */
+#carouselExample .carousel-inner .carousel-item img {
+    max-height: 300px; /* Ajusta esta altura máxima según sea necesario */
+    max-width: 100%; /* Asegura que la imagen no exceda el ancho del contenedor */
+    width: auto; /* Mantiene la proporción de la imagen */
+    margin: 0 auto; /* Centra la imagen si es más estrecha que el contenedor */
+}
+
+
+
+/* Estilos para el contenedor del toggle de modo oscuro */
+.toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centra los elementos */
+    margin-top: 10px;
+}
+
+.toggle-container p {
+    margin-right: 10px;
+    margin-bottom: 0; /* Evita margen inferior extra */
+}
+
+/* Estilos para el botón toggle de modo oscuro */
+.toggle-btn {
+    position: relative;
+    display: inline-block;
+    width: 50px; /* Ancho del toggle */
+    height: 24px; /* Alto del toggle */
+    background-color: #ccc;
+    border-radius: 24px; /* Hace los bordes redondeados */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Estilo para el círculo interior del toggle */
+.toggle-btn::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px; /* Ancho del círculo */
+    height: 20px; /* Alto del círculo */
+    background-color: white;
+    border-radius: 50%; /* Hace el círculo redondo */
+    transition: transform 0.3s;
+}
+
+/* Estilo cuando el modo oscuro está activo */
+.modo-oscuro .toggle-btn {
+    background-color: #003366; /* Color de fondo cuando está activo */
+}
+
+.modo-oscuro .toggle-btn::after {
+    transform: translateX(26px); /* Mueve el círculo a la derecha */
+}
+

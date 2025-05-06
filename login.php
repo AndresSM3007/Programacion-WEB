@@ -27,7 +27,7 @@ header("Expires: 0");
                             <div class="alert alert-danger"><?= $_SESSION['error_login']; unset($_SESSION['error_login']); ?></div>
                         <?php endif; ?>
                         
-                        <form id="loginForm" action="api/auth/login.php" method="POST">
+                        <form id="loginForm" action="api/login.php" method="POST">
                             <div class="mb-3">
                                 <label for="correo" class="form-label">Correo Electrónico</label>
                                 <input type="email" class="form-control" id="correo" name="correo" required>
